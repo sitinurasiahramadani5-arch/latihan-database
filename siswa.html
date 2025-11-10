@@ -13,7 +13,15 @@
   
   <script type="module">
     // impor fungsi atau library atau module dari file main.js
-    import { daftarSiswa } from "./main.js"
+    import { daftarSiswa, hapusSiswa, ubahSiswa } from "./main.js"
+    
+    //hapus siswa
+    //await hapusSiswa('7eJ9STGRJ4Xp42aBqx5w')
+    
+    
+   // ubah siswa 
+  await ubahSiswa ('y9J2g3K4uPvPGLhAlfja', 'ulala', 'XII')
+    
     
     //menampilkan daftar siswa
     let dataSiswa = await daftarSiswa()
@@ -21,8 +29,12 @@
     
     
     // loop data siswa
-    dataSiswa.forEach((siswa,index) => {
-      teks += (index + 1) + '.nama : ' + siswa.nama + ',kelas : ' + siswa.kelas + '<br>' ;
+    dataSiswa.forEach((siswa, index) => {
+      teks += (index + 1) + '.nama : ' + siswa.nama +
+        ', kelas : ' + siswa.kelas +
+        ', ID:' + siswa.id + '<br>';
+      
+      
     })
     
     document.getElementById('daftar').innerHTML = teks

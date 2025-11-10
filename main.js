@@ -61,7 +61,7 @@ export async function daftarSiswa() {
     const kueri = query(refDokumen, orderBy("nama"))
     
     //menampung data cuplikan kueri
-    const cuplikanKueri= await getDocs(kueri)
+    const cuplikanKueri = await getDocs(kueri)
     
     // tampung hasil kueri
     let hasilKueri = []
@@ -69,6 +69,7 @@ export async function daftarSiswa() {
     // loop cuplikan kueri,simpan ke variabel hasil kueri
     cuplikanKueri.forEach((dokumen) => {
         hasilKueri.push({
+            id: dokumen.id,
             nama: dokumen.data().nama,
             kelas: dokumen.data().kelas
             
@@ -77,4 +78,22 @@ export async function daftarSiswa() {
     
     //kembalikan nilai daftar siswa ke pemanggil fungsi
     return hasilKueri
+}
+
+// fungsi untuk menghapus data siswa berdasarkan id datanya
+export async function hapusSiswa(id) {
+    // hapus data siswa 
+    await deleteDoc(doc(db, "siswa", id))
+}
+
+// fungsi untuk mengubah data siswa berdasarkan id datanya
+export async function ubahSiswa(id, namaPengganti, kelasPengganti) {
+    //ubah data siswa
+    await updateDoc(
+        doc(db, "siswa",id),
+        {
+            nama: namaPengganti,
+            kelas: kelasPengganti
+        }
+    )
 }
